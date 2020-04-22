@@ -30,7 +30,7 @@ services:
 
   semaphore:
       restart: always
-      image: malteprang/ansible-semaphore
+      image: prangm/ansible-semaphore
       hostname: semaphore
       volumes:
         - ./conf/semaphore/:/semaphore

@@ -49,7 +49,7 @@ services:
 
   semaphore:
       restart: always
-      image: semaphore:0.1
+      image: prangm/ansible-semaphore
       hostname: semaphore
       volumes:
         - ./conf/semaphore/:/semaphore
