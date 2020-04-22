@@ -1,0 +1,70 @@
+version: '3'
+services:
+  # This Nginx will be the first to start, and it will serve the redirect as well as ACME verification
+  nginx:
+      image: nginx:alpine
+      restart: always
+      hostname: nginx
+      ports:
+        - "80:80"
+      volumes:
+        - ./conf/nginx.conf:/etc/nginx/nginx.conf:ro
+        - ./data/letsencrypt:/etc/letsencrypt
+        - ./data/letsencrypt-www:/tmp/letsencrypt
+  # This Nginx requires the certificates to exist, otherwise will fail
+  nginx_ssl:
+      image: nginx:alpine
+      restart: always
+      hostname: nginx_ssl
+      ports:
+        - "443:443"
+      volumes:
+        - ./conf/nginx_ssl_le.conf:/etc/nginx/nginx.conf:ro
+        - ./data/letsencrypt:/etc/letsencrypt
+        - ./data/letsencrypt-www:/tmp/letsencrypt
+  letsencrypt:
+      restart: always
+      image: vdhpieter/letsencrypt-webroot
+      volumes:
+        - /etc/localtime:/etc/localtime:ro
+        - /var/run/docker.sock:/var/run/docker.sock
+        - ./data/letsencrypt:/etc/letsencrypt
+        - ./data/letsencrypt-www:/tmp/letsencrypt
+      environment:
+        DOMAINS: example.com
+        EMAIL: webmaster@example.com
+        WEBROOT_PATH: /tmp/letsencrypt
+        EXP_LIMIT: 30
+        CHECK_FREQ: 30
+        STAGING: 0
+  mariadb: 
+    restart: always
+    image: mariadb
+    hostname: mariadb
+    volumes: 
+      - ./data/mysql:/var/lib/mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: changepasswd
+
+
+  semaphore:
+      restart: always
+      image: semaphore:0.1
+      hostname: semaphore
+      volumes:
+        - ./conf/semaphore/:/semaphore
+      links:
+        - mariadb
+        - nginx
+        - nginx_ssl
+      depends_on:
+        - mariadb
+      environment:
+        - WAIT_HOSTS=mariadb:3306
+        - WAIT_HOSTS_TIMEOUT=300
+        - WAIT_SLEEP_INTERVAL=30
+        - WAIT_HOST_CONNECT_TIMEOUT=30
+        - MYSQL_ROOT_PASSWORD=changepasswd
+      command: ["-c", "/wait && /update_conf && semaphore -migrate -config /semaphore/config.json && /add_admin ; semaphore -config /semaphore/config.json" ]
+
+    

@@ -1,0 +1,1 @@
+sed -i "s/replacepasswd/$MYSQL_ROOT_PASSWORD/g" /semaphore/config.json

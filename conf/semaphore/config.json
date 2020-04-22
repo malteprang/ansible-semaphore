@@ -1,0 +1,35 @@
+{
+ 	"mysql": {
+ 		"host": "mariadb:3306",
+ 		"user": "root",
+ 		"pass": "naecha4uon5Ohsh2ahchi5ohk1gaecoo1Emuegho4SahNg9eep",
+ 		"name": "semaphore"
+ 	},
+ 	"port": "",
+ 	"tmp_path": "/tmp/semaphore",
+ 	"cookie_hash": "yq05pMG9ermFuGTy5zN91bD/4R8QO9KKsUdi4SJOU84=",
+ 	"cookie_encryption": "oNtb6uRB9sCC3Ju0VnMkjtR70WdnrtHC3219+u//oPs=",
+ 	"email_sender": "",
+ 	"email_host": "",
+ 	"email_port": "",
+ 	"web_host": "http://localhost:8010/",
+ 	"ldap_binddn": "",
+ 	"ldap_bindpassword": "",
+ 	"ldap_server": "",
+ 	"ldap_searchdn": "",
+ 	"ldap_searchfilter": "",
+ 	"ldap_mappings": {
+ 		"dn": "",
+ 		"mail": "",
+ 		"uid": "",
+ 		"cn": ""
+ 	},
+ 	"telegram_chat": "",
+ 	"telegram_token": "",
+ 	"concurrency_mode": "",
+ 	"max_parallel_tasks": 0,
+ 	"email_alert": false,
+ 	"telegram_alert": false,
+ 	"ldap_enable": false,
+ 	"ldap_needtls": false
+ }

@@ -1,0 +1,1 @@
+mysql -h mariadb -uroot -p$MYSQL_ROOT_PASSWORD -e "INSERT INTO user(created,username,name,email,password,admin,external,alert)VALUES('2020-04-21 23:11:30','admin','','','\$2a\$11\$VXGIe5wuzGlDKnAvkCaawucsoTCsS1w7g3CPhl0yGSDWGzRPmdI.S','1','0','0')" semaphore
