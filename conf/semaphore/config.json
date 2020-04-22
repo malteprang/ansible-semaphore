@@ -2,7 +2,7 @@
  	"mysql": {
  		"host": "mariadb:3306",
  		"user": "root",
- 		"pass": "naecha4uon5Ohsh2ahchi5ohk1gaecoo1Emuegho4SahNg9eep",
+ 		"pass": "replacepasswd",
  		"name": "semaphore"
  	},
  	"port": "",
